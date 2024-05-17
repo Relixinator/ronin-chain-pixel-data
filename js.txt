@@ -1,0 +1,49 @@
+document.addEventListener('DOMContentLoaded', function() {
+    fetchPixelData();
+    fetchTimers();
+});
+
+async function fetchPixelData() {
+    try {
+        const response = await fetch('https://api.roninchain.com/pixels', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const pixelData = await response.json();
+
+        const pixelsContainer = document.getElementById('pixel-container');
+        pixelsContainer.innerHTML = '';
+
+        pixelData.forEach(pixel => {
+            const pixelElement = document.createElement('div');
+            pixelElement.className = 'pixel';
+            pixelElement.style.backgroundColor = pixel.color;
+            pixelsContainer.appendChild(pixelElement);
+        });
+    } catch (error) {
+        console.error('Error fetching pixel data:', error);
+    }
+}
+
+async function fetchTimers() {
+    try {
+        const response = await fetch('https://api.roninchain.com/timers', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const timerData = await response.json();
+
+        const timersContainer = document.getElementById('timer-container');
+        timersContainer.innerHTML = '';
+
+        timerData.forEach(timer => {
+            const timerElement = document.createElement('div');
+            timerElement.textContent = `Tree will load in: ${timer.timeRemaining} seconds`;
+            timersContainer.appendChild(timerElement);
+        });
+    } catch (error) {
+        console.error('Error fetching timer data:', error);
+    }
+}

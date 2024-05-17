@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#pixel-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pixel {
+    width: 20px;
+    height: 20px;
+    margin: 1px;
+}
+
+#timer-container {
+    margin-top: 20px;
+}
